@@ -1,24 +1,27 @@
-import { Controller, Get, Post, Patch } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
+import { TeacherModel } from './dto/teacher.dto';
 
 @Controller('teachers')
 export class TeacherController {
   @Get()
-  getTeachers() {
-    return 'All Teachers';
+  getTeachers(): TeacherModel[] {
+    return [
+      {
+        id: '1',
+        name: 'Annie',
+      },
+      {
+        id: '2',
+        name: 'Mike',
+      },
+    ];
   }
 
   @Get('/:teacherId')
-  getTeacherById() {
-    return 'Get Teacher By Id';
-  }
-
-  @Get('/:teacherId/students')
-  getStudents() {
-    return 'Get Student';
-  }
-
-  @Patch('/:teacherId/students/:studentId')
-  updateStudentTeacher() {
-    return 'Update Teacher';
+  getTeacherById(@Param('teacherId') teacherId: string): TeacherModel {
+    return {
+      id: '1',
+      name: 'Annie',
+    };
   }
 }
